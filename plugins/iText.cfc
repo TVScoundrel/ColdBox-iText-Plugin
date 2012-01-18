@@ -45,7 +45,7 @@ component extends="coldbox.system.Plugin" singleton="true"{
 			}
 			
 			if (arrayLen(classPaths) == 0) {
-				throw(message="Class not found");
+				throw(message="Class not found: #arguments.class#");
 			}			
 
 			var classPath = classPaths[1];
