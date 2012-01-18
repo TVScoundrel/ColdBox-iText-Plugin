@@ -1,0 +1,4 @@
+# Compiled source #
+###################
+javaProject/iTextCFC/build/*
+javaProject/iTextCFC/dist/*
