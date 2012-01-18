@@ -90,7 +90,7 @@ component extends="coldbox.system.Plugin" singleton="true"{
 	* - in. if measurement = imperial
 	* - user space units by default (1/72 in. = 1pt if in 72ppi)
 	*/
-	any function newStandardSizeDocument(
+	any function standardSizeDocument(
 		required string size,
 		required numeric leftMargin,
 		required numeric rightMargin,
