@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="iTextCFC" default="clean" basedir=".">
+	<target name="clean">
+		<delete dir="build" />
+		<delete dir="dist" />
+	</target>
+	<target name="init">
+		<mkdir dir="build/classes" />
+		<mkdir dir="dist" />
+	</target>
+	<target name="compile" depends="init">
+		<javac srcdir="src" destdir="build/classes" />
+	</target>
+	<target name="makejar" description="Creates a jar for the iTextCFC project">
+		<jar destfile="dist/iTextCFC.jar" basedir="build/classes" />
+	</target>
+</project>
