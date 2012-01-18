@@ -143,7 +143,7 @@ document = iText.sizedDocument(
 
 /*
 * Will return an empty document with given standard page dimensions
-* because measurement is metric, the size will be calculated using milimeter
+* because measurement is metric, the margins will be calculated using milimeter
 */
 document = iText.standardSizeDocument(
 	size="A4",
