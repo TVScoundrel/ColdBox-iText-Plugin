@@ -4,6 +4,7 @@
 component extends="coldbox.system.Plugin" singleton="true"{
 	
 	property name="jl" inject="coldbox:plugin:JavaLoader";
+	property name="libPath" type="string";
 	
 	/**
 	* constructor
@@ -11,9 +12,6 @@ component extends="coldbox.system.Plugin" singleton="true"{
 	iText function init(required any controller){
 		super.init(arguments.controller);
 			
-		// Set the library path
-		this.libPath 	= "/#getSetting("appMapping")#/plugins/iText-lib";
-		
 		// Plugin Properties
 		setPluginName("iText");
 		setPluginVersion("1.0");
@@ -21,10 +19,14 @@ component extends="coldbox.system.Plugin" singleton="true"{
 		setPluginAuthor("Tom Van Schoor");
 		setPluginAuthorURL("www.tutuka.com");
 		
-		// Load jar files.
-		getPlugin("JavaLoader").appendPaths(expandPath("#this.libPath#"));
-
 		return this;
+	}
+	
+	function onDIComplete(){
+		// Set the library path
+		libPath 	= "/#getSetting("appMapping")#/plugins/iText-lib";
+		// Load jar files.
+		jl.appendPaths(expandPath("#libPath#"));
 	}
 	
 	/**
@@ -36,7 +38,7 @@ component extends="coldbox.system.Plugin" singleton="true"{
 		
 		if (arguments.partial){
 			var iTextClasses = jl.create("com.tutuka.itext.iTextCFC");
-			var classPaths = iTextClasses.getClassPath(arguments.class, "#expandPath("#this.libPath#")#/itextpdf-5.1.3.jar");
+			var classPaths = iTextClasses.getClassPath(arguments.class, "#expandPath("#libPath#")#/itextpdf-5.1.3.jar");
 
 			if (arrayLen(classPaths) > 1) {
 				throw(message="Multiple classes found: #arrayToList(classPath)#");
