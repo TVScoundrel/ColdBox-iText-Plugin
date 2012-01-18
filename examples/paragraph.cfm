@@ -10,7 +10,7 @@ Ham tail shoulder, pig sirloin t-bone pork belly capicola tri-tip bacon sausage 
 <cfscript>
 	iText = getMyPlugin("iText");
 	
-	// set up the document as A4 wich writes to a ByteArrayOutputStream in memory
+	// set up the document as A4 which writes to a ByteArrayOutputStream in memory
 	document = iText.standardSizeDocument(
 		size="A4",
 		leftMargin=20,
