@@ -114,6 +114,17 @@ component extends="coldbox.system.Plugin" singleton="true"{
 	}
 	
 	/**
+	*
+	*/
+	void function showInBrowser(required any content){
+		// alternative for:
+		// <cfcontent type="application/pdf" reset="true" variable="#arguments.content#">
+		response = getPageContext().getFusionContext().getResponse();
+		response.setHeader("Content-Type", "application/pdf");
+		response.getOutputStream().writeThrough(arguments.content);
+	}
+	
+	/**
 	* Function to calculate the user space units used in PDF
 	* according to the chosen measurement system
 	* - mm. if measurement = metric
