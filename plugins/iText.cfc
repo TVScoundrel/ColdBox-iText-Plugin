@@ -6,9 +6,6 @@ component extends="coldbox.system.Plugin" singleton="true"{
 	property name="jl" inject="coldbox:plugin:JavaLoader";
 	property name="libPath" type="string";
 	
-	/**
-	* constructor
-	*/
 	iText function init(required any controller){
 		super.init(arguments.controller);
 			
@@ -39,7 +36,7 @@ component extends="coldbox.system.Plugin" singleton="true"{
 		if (arguments.partial){
 			var iTextClasses = jl.create("com.tutuka.itext.iTextCFC");
 			var classPaths = iTextClasses.getClassPath(arguments.class, "#expandPath("#libPath#")#/itextpdf-5.1.3.jar");
-
+			
 			if (arrayLen(classPaths) > 1) {
 				throw(message="Multiple classes found: #arrayToList(classPath)#");
 			}
@@ -113,15 +110,19 @@ component extends="coldbox.system.Plugin" singleton="true"{
 		return get("Document").init(local.pageSize, dimensions.leftMargin, dimensions.rightMargin, dimensions.topMargin, dimensions.bottomMargin);
 	}
 	
-	/**
-	*
-	*/
 	void function showInBrowser(required any content){
 		// alternative for:
 		// <cfcontent type="application/pdf" reset="true" variable="#arguments.content#">
 		response = getPageContext().getFusionContext().getResponse();
 		response.setHeader("Content-Type", "application/pdf");
 		response.getOutputStream().writeThrough(arguments.content);
+	}
+	
+	any function getHeaderFooterHelper(required any writer, required any document){
+		var header = getFullPath("com.tutuka.itext.Header").init(writer, document);
+		var footer = getFullPath("com.tutuka.itext.Footer").init(writer, document);
+		var headerFooterHelper = getFullPath("com.tutuka.itext.PdfPageEventHelperHeaderFooter").init(header, footer);
+		return headerFooterHelper;
 	}
 	
 	/**
