@@ -16,13 +16,11 @@ public class iTextCFC {
 		
 		FileInputStream fis = null;
 		
-		String dottedClassName = "." + className;
+		String dottedClassName = "." + className.replace("$", "\\$");
 		
 		List<String> classPath = new ArrayList<String>();
 		Pattern classPattern = Pattern.compile(dottedClassName.replaceAll("\\.", "\\\\.") + "$");
 		Matcher matcher = null;
-		
-		System.out.println(classPattern);
 		
 		try {
 			
@@ -46,6 +44,7 @@ public class iTextCFC {
 						matcher = classPattern.matcher(baseName);
 						while (matcher.find()) {
 							classPath.add(baseName);
+							System.out.println(baseName);
 						}
 					}
 				}
@@ -62,7 +61,8 @@ public class iTextCFC {
 	}
 	
 	public static void main(String[] args) {
-		getClassPath("Document","E:/www/development/CorporateGiftCard/plugins/iText-lib/itextpdf-5.1.3.jar");
+		//getClassPath("ZapfDingbatsNumberList","E:/www/development/CorporateGiftCard/plugins/iText-lib/itextpdf-5.1.3.jar");
+		System.out.println("Hello World");
 	}
 
 }
