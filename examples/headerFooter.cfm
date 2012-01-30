@@ -27,7 +27,7 @@ Ham tail shoulder, pig sirloin t-bone pork belly capicola tri-tip bacon sausage 
 	headerFooterHelper = iText.getHeaderFooterHelper(writer,document);
 	writer.setPageEvent(headerFooterHelper);
 
-	// headerFooterHelper has two members of types: com.tutuka.itext.Header and com.tutuka.itext.Header
+	// headerFooterHelper has two members of types: com.tutuka.itext.Header and com.tutuka.itext.Footer
 	// they are extensions of the com.tutuka.itext.HeaderFooter abstract class
 	// get the header and footer from the headerFooterHelper so we can populate them to give our PDF some nice headers and footers
 	header = headerFooterHelper.getHeader();
@@ -44,7 +44,7 @@ Ham tail shoulder, pig sirloin t-bone pork belly capicola tri-tip bacon sausage 
 	cell.setFixedHeight(javacast("float", 80)); // Set the height of the cell (for now only float = pt but will create calculate function soon)
 	cell.setVerticalAlignment(iText.get("Element").ALIGN_MIDDLE); // just gona center everything
 	cell.setHorizontalAlignment(iText.get("Element").ALIGN_CENTER);
-	defaultHead.addCell(cell); // add the cell to the table and...
+	defaultHead.addCell(cell); // add the cell to the table
 	
 	// now doing exactly the same for the footer
 	defaultFoot = iText.get("PdfPTable").init(1);
@@ -59,8 +59,8 @@ Ham tail shoulder, pig sirloin t-bone pork belly capicola tri-tip bacon sausage 
 	
 	// Now I want a bigger header on the first page so...
 	bigHead = iText.get("PdfPTable").init(1);
-	header.setContentForPage(1, bigHead); // I am adding the content for page 1; the method name speaks for itself
-	font = iText.get("Font").init(iText.get("BaseFont").createFont(), javacast("float", 26)); // Fool with the font
+	header.setContentForPage(1, bigHead); // I am setting the content for page 1; the method name speaks for itself
+	font = iText.get("Font").init(iText.get("BaseFont").createFont(), javacast("float", 26)); // Fool around with the font
 	cell = iText.get("PdfPCell").init(iText.get("Phrase").init("I am a big header", font));
 	cell.setFixedHeight(javacast("float", 140));
 	cell.setVerticalAlignment(iText.get("Element").ALIGN_MIDDLE);
